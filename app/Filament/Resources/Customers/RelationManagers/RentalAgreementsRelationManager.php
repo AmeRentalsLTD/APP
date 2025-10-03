@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Customers\RelationManagers;
 
 use App\Filament\Resources\RentalAgreements\Schemas\RentalAgreementForm;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
@@ -19,10 +19,11 @@ class RentalAgreementsRelationManager extends RelationManager
 
     protected static ?string $title = 'Rental agreements';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form->schema(
-            RentalAgreementForm::getComponents(includeCustomerField: false)
+        return RentalAgreementForm::configure(
+            $schema,
+            includeCustomerField: false
         );
     }
 
