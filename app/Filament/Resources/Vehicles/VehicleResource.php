@@ -5,20 +5,26 @@ namespace App\Filament\Resources\Vehicles;
 use App\Filament\Resources\Vehicles\Pages\CreateVehicle;
 use App\Filament\Resources\Vehicles\Pages\EditVehicle;
 use App\Filament\Resources\Vehicles\Pages\ListVehicles;
+use App\Filament\Resources\Vehicles\RelationManagers\FinancialTransactionsRelationManager;
+use App\Filament\Resources\Vehicles\RelationManagers\MaintenanceRecordsRelationManager;
+use App\Filament\Resources\Vehicles\RelationManagers\RentalAgreementsRelationManager;
 use App\Filament\Resources\Vehicles\Schemas\VehicleForm;
 use App\Filament\Resources\Vehicles\Tables\VehiclesTable;
 use App\Models\Vehicle;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-truck';
+
+    protected static ?string $navigationGroup = 'Fleet Operations';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'registration';
 
@@ -35,7 +41,9 @@ class VehicleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RentalAgreementsRelationManager::class,
+            MaintenanceRecordsRelationManager::class,
+            FinancialTransactionsRelationManager::class,
         ];
     }
 
