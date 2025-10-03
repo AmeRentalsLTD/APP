@@ -3,73 +3,98 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>AME Rentals Ltd</title>
+        <title>AME Rentals Ltd Portal</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <style>
             :root {
                 color-scheme: light;
-                --primary: #0d9488;
-                --primary-dark: #0f766e;
-                --secondary: #1f2937;
-                --background: #f7f9fb;
-                --text: #0b1120;
+                --primary: #0f766e;
+                --primary-dark: #0d5f57;
+                --secondary: #0f172a;
+                --muted: #475569;
+                --surface: #ffffff;
+                --surface-muted: #f1f5f9;
+                --accent: #38bdf8;
             }
 
-            * {
+            *,
+            *::before,
+            *::after {
                 box-sizing: border-box;
             }
 
             body {
                 margin: 0;
-                font-family: 'Manrope', sans-serif;
-                background: var(--background);
-                color: var(--text);
+                font-family: 'Inter', sans-serif;
+                background: radial-gradient(circle at top, rgba(14, 116, 144, 0.12), transparent 55%), var(--surface-muted);
+                color: var(--secondary);
                 line-height: 1.6;
             }
 
-            header {
-                background: linear-gradient(135deg, rgba(13, 148, 136, 0.95), rgba(15, 118, 110, 0.95)),
-                    url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1400&q=80') center/cover;
-                color: white;
-                padding: 3.5rem 1.5rem 5rem;
-                text-align: center;
+            a {
+                color: inherit;
             }
 
-            nav {
+            header {
+                background: linear-gradient(135deg, rgba(15, 118, 110, 0.96), rgba(56, 189, 248, 0.92));
+                color: white;
+                padding: 3.5rem 1.5rem 5rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            header::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80') center/cover;
+                mix-blend-mode: soft-light;
+                opacity: 0.35;
+                pointer-events: none;
+            }
+
+            .topbar {
+                position: relative;
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
-                max-width: 1100px;
-                margin: 0 auto 3.5rem;
+                justify-content: space-between;
                 gap: 1.5rem;
+                max-width: 1100px;
+                margin: 0 auto 3rem;
                 flex-wrap: wrap;
             }
 
-            nav .brand {
-                font-weight: 700;
-                font-size: 1.5rem;
-                letter-spacing: 1px;
-            }
-
-            nav .cta {
-                background: white;
-                color: var(--primary);
-                padding: 0.75rem 1.5rem;
-                border-radius: 999px;
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.9rem;
                 font-weight: 600;
-                text-decoration: none;
-                box-shadow: 0 8px 20px rgba(8, 94, 84, 0.3);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                font-size: 1.35rem;
+                letter-spacing: 0.02em;
             }
 
-            nav .cta:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 24px rgba(8, 94, 84, 0.35);
+            .brand span:last-child {
+                font-weight: 500;
+                font-size: 0.95rem;
+                opacity: 0.85;
+            }
+
+            .brand .mark {
+                width: 44px;
+                height: 44px;
+                border-radius: 14px;
+                background: rgba(15, 118, 110, 0.2);
+                display: grid;
+                place-items: center;
+                border: 1px solid rgba(255, 255, 255, 0.24);
+                font-weight: 700;
+                font-size: 1rem;
             }
 
             .hero {
+                position: relative;
                 max-width: 900px;
                 margin: 0 auto;
                 text-align: center;
@@ -77,14 +102,16 @@
 
             .hero h1 {
                 font-size: clamp(2.5rem, 6vw, 3.6rem);
-                margin-bottom: 1rem;
                 font-weight: 700;
+                margin-bottom: 1.25rem;
+                letter-spacing: -0.02em;
             }
 
             .hero p {
                 font-size: 1.15rem;
-                margin-bottom: 2rem;
-                color: rgba(255, 255, 255, 0.9);
+                color: rgba(255, 255, 255, 0.92);
+                margin: 0 auto 2.5rem;
+                max-width: 680px;
             }
 
             .hero-actions {
@@ -98,293 +125,275 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                gap: 0.5rem;
-                padding: 0.85rem 1.7rem;
+                gap: 0.6rem;
+                padding: 0.85rem 1.8rem;
                 border-radius: 999px;
-                text-decoration: none;
                 font-weight: 600;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                text-decoration: none;
+                transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             }
 
             .btn-primary {
-                background: white;
+                background: #ffffff;
                 color: var(--primary);
-                box-shadow: 0 8px 20px rgba(15, 118, 110, 0.35);
+                box-shadow: 0 16px 32px rgba(15, 118, 110, 0.28);
             }
 
-            .btn-secondary {
-                background: rgba(255, 255, 255, 0.12);
-                color: white;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+            .btn-primary:hover {
+                transform: translateY(-3px);
             }
 
-            .btn:hover {
-                transform: translateY(-2px);
+            .btn-outline {
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            .btn-outline:hover {
+                background: rgba(255, 255, 255, 0.18);
+                transform: translateY(-3px);
             }
 
             main {
                 max-width: 1100px;
-                margin: -3rem auto 4rem;
+                margin: -3.5rem auto 4.5rem;
                 padding: 0 1.5rem;
+                position: relative;
+                z-index: 1;
             }
 
             section {
-                background: white;
+                background: var(--surface);
                 border-radius: 28px;
-                padding: 2.5rem;
+                padding: 2.75rem;
                 margin-bottom: 2.5rem;
-                box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+                box-shadow: 0 24px 45px -20px rgba(15, 23, 42, 0.25);
             }
 
             h2 {
                 font-size: 2rem;
-                margin-bottom: 1.25rem;
+                margin-bottom: 1.5rem;
                 color: var(--secondary);
             }
 
-            .features {
+            .grid-3 {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
                 gap: 1.75rem;
             }
 
             .feature-card {
-                padding: 1.5rem;
-                border-radius: 20px;
-                background: var(--background);
-                border: 1px solid rgba(15, 118, 110, 0.1);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-            }
-
-            .feature-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+                padding: 1.75rem;
+                border-radius: 22px;
+                border: 1px solid rgba(15, 118, 110, 0.15);
+                background: linear-gradient(160deg, rgba(15, 118, 110, 0.05), rgba(56, 189, 248, 0.05));
             }
 
             .feature-card h3 {
-                margin-top: 0.5rem;
-                margin-bottom: 0.75rem;
-                font-size: 1.25rem;
-                color: var(--primary-dark);
+                margin-top: 0;
+                font-size: 1.2rem;
+                color: var(--primary);
             }
 
-            .fleet {
+            .steps {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 1.5rem;
+                gap: 1rem;
             }
 
-            .van-card {
+            .step {
+                display: grid;
+                grid-template-columns: minmax(0, 48px) 1fr;
+                gap: 1rem;
+                align-items: start;
+                background: var(--surface-muted);
                 border-radius: 20px;
-                overflow: hidden;
-                border: 1px solid rgba(15, 118, 110, 0.1);
-                box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-                transition: transform 0.2s ease;
-                background: white;
-            }
-
-            .van-card img {
-                width: 100%;
-                height: 180px;
-                object-fit: cover;
-            }
-
-            .van-card:hover {
-                transform: translateY(-4px);
-            }
-
-            .van-card .content {
                 padding: 1.5rem;
             }
 
-            .van-card h3 {
-                margin-top: 0;
-                margin-bottom: 0.5rem;
-                color: var(--secondary);
-            }
-
-            .van-card span {
-                display: inline-block;
-                background: rgba(13, 148, 136, 0.1);
-                color: var(--primary-dark);
-                padding: 0.4rem 0.8rem;
-                border-radius: 999px;
-                font-size: 0.85rem;
-                font-weight: 600;
-                margin-top: 0.75rem;
-            }
-
-            .testimonials {
+            .step-number {
+                width: 48px;
+                height: 48px;
+                border-radius: 16px;
+                background: rgba(15, 118, 110, 0.12);
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                gap: 1.5rem;
+                place-items: center;
+                color: var(--primary);
+                font-weight: 600;
             }
 
-            .testimonial {
-                background: var(--background);
+            .info-panel {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+                background: linear-gradient(120deg, rgba(15, 118, 110, 0.08), rgba(56, 189, 248, 0.08));
                 border-radius: 20px;
                 padding: 1.75rem;
-                border: 1px solid rgba(15, 118, 110, 0.1);
-                position: relative;
             }
 
-            .testimonial::before {
-                content: '“';
-                font-size: 3rem;
-                color: rgba(15, 118, 110, 0.2);
-                position: absolute;
-                top: 1rem;
-                left: 1.25rem;
-            }
-
-            .testimonial strong {
+            .info-panel strong {
                 display: block;
-                margin-top: 1rem;
                 color: var(--secondary);
+                margin-bottom: 0.3rem;
             }
 
-            .cta-section {
+            .info-panel span {
+                color: var(--muted);
+                font-size: 0.95rem;
+            }
+
+            .contact-card {
+                background: linear-gradient(120deg, rgba(15, 118, 110, 0.9), rgba(13, 148, 136, 0.88));
+                color: #ffffff;
+                border-radius: 26px;
+                padding: 2.5rem;
                 text-align: center;
-                background: linear-gradient(135deg, rgba(13, 148, 136, 0.95), rgba(15, 118, 110, 0.95)),
-                    url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80') center/cover;
-                color: white;
-                padding: 3rem;
             }
 
-            .cta-section h2 {
-                color: white;
-                margin-bottom: 1rem;
-            }
-
-            .cta-section p {
-                max-width: 520px;
-                margin: 0.5rem auto 2rem;
-                color: rgba(255, 255, 255, 0.85);
+            .contact-card p {
+                margin: 0.75rem auto 2rem;
+                max-width: 480px;
+                color: rgba(255, 255, 255, 0.88);
             }
 
             footer {
                 text-align: center;
-                padding: 2rem 1.5rem 3rem;
-                color: #6b7280;
+                padding: 2.5rem 1.5rem 3rem;
+                color: #64748b;
                 font-size: 0.95rem;
+            }
+
+            .legal {
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+                margin-top: 1rem;
             }
 
             @media (max-width: 768px) {
                 header {
-                    padding: 2.5rem 1.25rem 4rem;
+                    padding: 2.75rem 1.25rem 4rem;
                 }
 
-                nav {
+                .topbar {
                     justify-content: center;
-                }
-
-                main {
-                    margin-top: -2rem;
                 }
 
                 section {
                     padding: 2rem;
+                }
+
+                .step {
+                    grid-template-columns: 1fr;
+                }
+
+                .step-number {
+                    justify-self: start;
                 }
             }
         </style>
     </head>
     <body>
         <header>
-            <nav>
-                <div class="brand">AME Rentals Ltd</div>
-                <a class="cta" href="tel:+447123456789">Book now</a>
-            </nav>
+            <div class="topbar">
+                <div class="brand">
+                    <div class="mark">AME</div>
+                    <div>
+                        <span>AME Rentals Ltd</span>
+                        <span>Operations Portal</span>
+                    </div>
+                </div>
+                <a class="btn btn-outline" href="mailto:support@amerentals.co.uk">support@amerentals.co.uk</a>
+            </div>
             <div class="hero">
-                <h1>Experience the road with AME Rentals Ltd premium vans</h1>
-                <p>Planning a family road trip, moving your crew to an event, or need flexible mobility for business deliveries? AME Rentals Ltd keeps you moving with a modern fleet tailored to every journey.</p>
+                <h1>Welcome to the AME Rentals operations portal</h1>
+                <p>Centralise fleet management, track bookings and support every journey from the dedicated AME Rentals platform. Log in for the latest tools crafted for our teams and trusted partners.</p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary" href="#fleet">Explore our fleet</a>
-                    <a class="btn btn-secondary" href="#about">Discover our story</a>
+                    <a class="btn btn-primary" href="/admin">Launch portal</a>
+                    <a class="btn btn-outline" href="#support">Contact support</a>
                 </div>
             </div>
         </header>
 
         <main>
-            <section id="about">
-                <h2>Why choose AME Rentals Ltd?</h2>
-                <div class="features">
+            <section>
+                <h2>Built for the AME Rentals ecosystem</h2>
+                <div class="grid-3">
                     <article class="feature-card">
-                        <h3>Trusted UK operator</h3>
-                        <p>Founded in London in 2017, AME Rentals Ltd supports corporate partners and families alike with reliable, fully insured vehicles and professional service.</p>
-                    </article>
-                    <article class="feature-card">
-                        <h3>Flexible mobility</h3>
-                        <p>Short-term rentals, long-term agreements, and bespoke logistics packages ensure you only pay for the time and equipment you truly need.</p>
+                        <h3>Fleet intelligence</h3>
+                        <p>Monitor availability, maintenance windows and vehicle handovers in real time. Our live dashboard keeps dispatch and operations teams aligned across the UK.</p>
                     </article>
                     <article class="feature-card">
-                        <h3>Dedicated assistance</h3>
-                        <p>Our multilingual support team is available 24/7 with route planning, roadside assistance, and safety briefings for every driver.</p>
+                        <h3>Booking lifecycle</h3>
+                        <p>Create quotes, approve contracts and capture customer documentation in one place. Every step of a rental—from enquiry to return—is tracked for compliance.</p>
                     </article>
                     <article class="feature-card">
-                        <h3>Transparent pricing</h3>
-                        <p>No hidden fees—just clear, competitive rates with maintenance, insurance, and GPS tracking included as standard.</p>
-                    </article>
-                </div>
-            </section>
-
-            <section id="fleet">
-                <h2>Our signature fleet</h2>
-                <div class="fleet">
-                    <article class="van-card">
-                        <img src="https://images.unsplash.com/photo-1525104698733-6f6c4d54936f?auto=format&fit=crop&w=900&q=80" alt="Van premium">
-                        <div class="content">
-                            <h3>Urban Explorer</h3>
-                            <p>Compact nine-seater ideal for airport shuttles and inner-city deliveries with efficient fuel consumption.</p>
-                            <span>From £69 / day</span>
-                        </div>
-                    </article>
-                    <article class="van-card">
-                        <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Van pentru aventuri">
-                        <div class="content">
-                            <h3>Adventure XL</h3>
-                            <p>Spacious tourer equipped with sleeping pods, portable fridge, and bike racks for week-long getaways.</p>
-                            <span>From £92 / day</span>
-                        </div>
-                    </article>
-                    <article class="van-card">
-                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=900&q=80" alt="Van business">
-                        <div class="content">
-                            <h3>Business Shuttle</h3>
-                            <p>Premium Mercedes-Benz vans with Wi-Fi, conference seating, and chauffeur options for executive travel.</p>
-                            <span>From £115 / day</span>
-                        </div>
+                        <h3>Secure collaboration</h3>
+                        <p>Role-based access, audit trails and encrypted records protect partner and client data. Designed to meet the expectations of corporate mobility programmes.</p>
                     </article>
                 </div>
             </section>
 
             <section>
-                <h2>Client feedback</h2>
-                <div class="testimonials">
-                    <article class="testimonial">
-                        <p>“AME Rentals Ltd kept our touring production on schedule across the UK. Immaculate vehicles and proactive communication.”</p>
-                        <strong>Sarah Mitchell, Tour Manager</strong>
-                    </article>
-                    <article class="testimonial">
-                        <p>“Ideal partner for corporate events. Their chauffeur-driven Business Shuttle delivered a flawless VIP experience.”</p>
-                        <strong>James Turner, HR Director</strong>
-                    </article>
-                    <article class="testimonial">
-                        <p>“We hired the Adventure XL for a Scottish Highlands adventure and loved every mile—well-equipped and ready for the wild.”</p>
-                        <strong>Emma Wilson, Travel Enthusiast</strong>
-                    </article>
+                <h2>Getting started</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3>Sign in with your AME credentials</h3>
+                            <p>Access is restricted to authorised team members and verified partners. Use your company-issued email address and the secure password provided by AME Rentals IT.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3>Configure your workspace</h3>
+                            <p>Pin favourite fleet views, activate notifications for reservations you manage and synchronise calendar reminders for upcoming deliveries or collections.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3>Stay connected with support</h3>
+                            <p>Submit service tickets, request additional vehicles or report incidents directly from the portal. The AME support desk responds within business-critical SLAs.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section id="contact" class="cta-section">
-                <h2>Ready to start your journey?</h2>
-                <p>Call or email our London operations team with your itinerary. We will prepare a tailored quote within 30 minutes, including delivery and collection options across the UK.</p>
-                <a class="btn btn-primary" href="tel:+447123456789">+44 7123 456 789</a>
-                <a class="btn btn-secondary" href="mailto:booking@amerentals.co.uk">booking@amerentals.co.uk</a>
+            <section id="support">
+                <h2>Dedicated support when you need it</h2>
+                <div class="info-panel">
+                    <div>
+                        <strong>Portal enquiries</strong>
+                        <span>support@amerentals.co.uk</span>
+                    </div>
+                    <div>
+                        <strong>Operations hotline</strong>
+                        <span>+44 20 7123 4567 · 24/7 assistance for active rentals</span>
+                    </div>
+                    <div>
+                        <strong>Head office</strong>
+                        <span>71-75 Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-card">
+                <h2>Need access to the portal?</h2>
+                <p>New partner or team member? Reach out to our onboarding specialists to receive credentials, schedule training and align the portal with your operational objectives.</p>
+                <div class="hero-actions" style="justify-content: center;">
+                    <a class="btn btn-primary" href="mailto:onboarding@amerentals.co.uk">Request access</a>
+                    <a class="btn btn-outline" href="tel:+442071234567">Call the team</a>
+                </div>
             </section>
         </main>
 
         <footer>
-            &copy; {{ date('Y') }} AME Rentals Ltd · Registered in England & Wales · Company No. 10876543
+            <div>© {{ date('Y') }} AME Rentals Ltd · Registered in England & Wales · Company number 16733322</div>
+            <div class="legal">
+                <span>app.amerentals.co.uk is the secure access point for AME Rentals Ltd internal and partner operations.</span>
+                <span>Use of this portal is subject to monitoring and AME Rentals Ltd information security policies.</span>
+            </div>
         </footer>
     </body>
 </html>
