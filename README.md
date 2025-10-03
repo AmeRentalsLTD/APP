@@ -1,1 +1,63 @@
-# AME RENTALS – Laravel App
+# AME Rentals Platform
+
+## Getting Started
+
+1. Install PHP dependencies:
+
+   ```bash
+   composer install
+   ```
+
+2. Create your environment file and generate an application key:
+
+   ```bash
+   cp .env.example .env # create your own if the example file is not available
+   php artisan key:generate
+   ```
+
+3. For local development this project uses SQLite by default. Ensure the database file exists:
+
+   ```bash
+   touch database/database.sqlite
+   ```
+
+4. Run the database migrations:
+
+   ```bash
+   php artisan migrate
+   ```
+
+5. (Optional) Install the JavaScript dependencies for the Filament admin panel assets:
+
+   ```bash
+   npm install
+   npm run build
+   ```
+
+## API Overview
+
+The first iteration of the fleet rental platform exposes a versioned REST API located under `/api/v1`.
+
+| Resource            | Endpoints                                                                 |
+|---------------------|---------------------------------------------------------------------------|
+| Vehicles            | `GET/POST /api/v1/vehicles`, `GET/PATCH/DELETE /api/v1/vehicles/{id}`     |
+| Customers           | `GET/POST /api/v1/customers`, `GET/PATCH/DELETE /api/v1/customers/{id}`   |
+| Rental Agreements   | `GET/POST /api/v1/rental-agreements`, `GET/PATCH/DELETE /api/v1/rental-agreements/{id}` |
+
+### Validation highlights
+
+- Vehicle registration numbers are normalised to uppercase and must be unique.
+- Customers support multiple organisation types (`individual`, `sole_trader`, `partnership`, `ltd`, `llp`).
+- Rental agreements enforce compatible options for billing cycles, mileage policies, and payment cadence.
+
+Each endpoint returns a JSON:API-like payload with the resource stored under the `data` key. Pagination metadata is included automatically when listing resources.
+
+## Testing
+
+Run the feature and unit test suite with:
+
+```bash
+php artisan test
+```
+
+These tests cover the core CRUD flows for vehicles, customers, and rental agreements that underpin Phase 1 of the roadmap.

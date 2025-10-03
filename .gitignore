@@ -13,3 +13,5 @@ yarn-error.log
 /.vscode
 /.DS_Store
 /public/build
+
+/.phpunit.result.cache

@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    use HasFactory;
+
+    public const TYPES = [
+        'individual',
+        'sole_trader',
+        'partnership',
+        'ltd',
+        'llp',
+    ];
+
     protected $fillable = [
         'type',
         'first_name',
@@ -27,4 +34,13 @@ class Customer extends Model
         'dob',
         'nin',
     ];
+
+    protected $casts = [
+        'dob' => 'date',
+    ];
+
+    public function rentalAgreements(): HasMany
+    {
+        return $this->hasMany(RentalAgreement::class);
+    }
 }
