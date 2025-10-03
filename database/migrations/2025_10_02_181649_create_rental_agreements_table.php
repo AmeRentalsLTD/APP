@@ -40,9 +40,9 @@ return new class extends Migration
 			$table->timestamps();
 
                         // Un singur contract activ per vehicul
-                        if (Schema::getConnection()->getDriverName() === 'mysql') {
+                        if (in_array(Schema::getConnection()->getDriverName(), ['mysql', 'mariadb'], true)) {
                                 $table->unsignedBigInteger('active_vehicle_id')
-                                      ->virtualAs("case when `status` = 'active' then `vehicle_id` else null end");
+                                      ->storedAs("case when `status` = 'active' then `vehicle_id` else null end");
 
                                 $table->unique('active_vehicle_id', 'vehicle_active_unique');
                         } else {
