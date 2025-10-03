@@ -20,7 +20,7 @@ class VehicleResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'reg_no';
+    protected static ?string $recordTitleAttribute = 'registration';
 
     public static function form(Schema $schema): Schema
     {
