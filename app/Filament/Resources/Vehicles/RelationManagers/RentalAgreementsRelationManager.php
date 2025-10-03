@@ -4,10 +4,10 @@ namespace App\Filament\Resources\Vehicles\RelationManagers;
 
 use App\Filament\Resources\RentalAgreements\Schemas\RentalAgreementForm;
 use Filament\Schemas\Schema;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
