@@ -8,6 +8,7 @@ use App\Filament\Resources\Vehicles\Pages\ListVehicles;
 use App\Filament\Resources\Vehicles\RelationManagers\FinancialTransactionsRelationManager;
 use App\Filament\Resources\Vehicles\RelationManagers\MaintenanceRecordsRelationManager;
 use App\Filament\Resources\Vehicles\RelationManagers\RentalAgreementsRelationManager;
+use App\Filament\Resources\Vehicles\RelationManagers\VehicleInspectionsRelationManager;
 use App\Filament\Resources\Vehicles\Schemas\VehicleForm;
 use App\Filament\Resources\Vehicles\Tables\VehiclesTable;
 use App\Models\Vehicle;
@@ -45,6 +46,7 @@ class VehicleResource extends Resource
             RentalAgreementsRelationManager::class,
             MaintenanceRecordsRelationManager::class,
             FinancialTransactionsRelationManager::class,
+            VehicleInspectionsRelationManager::class,
         ];
     }
 
