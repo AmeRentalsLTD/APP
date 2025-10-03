@@ -9,6 +9,7 @@ use App\Filament\Resources\RentalAgreements\Schemas\RentalAgreementForm;
 use App\Filament\Resources\RentalAgreements\Tables\RentalAgreementsTable;
 use App\Models\RentalAgreement;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -19,7 +20,7 @@ class RentalAgreementResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
 
-    protected static ?string $navigationGroup = 'Fleet Operations';
+    protected static UnitEnum|string|null $navigationGroup = 'Fleet Operations';
 
     protected static ?int $navigationSort = 2;
 
