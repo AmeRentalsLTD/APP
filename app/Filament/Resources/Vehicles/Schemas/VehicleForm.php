@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Vehicles\Schemas;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
+use App\Models\Vehicle;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class VehicleForm
 {
@@ -44,13 +46,13 @@ class VehicleForm
 
             // Status
             Select::make('status')
-                ->options([
-                    'available'   => 'Available',
-                    'rented'      => 'Rented',
-                    'maintenance' => 'Maintenance',
-                    'reserved'    => 'Reserved',
-                ])
-                ->default('available'),
+                ->options(
+                    collect(Vehicle::STATUSES)
+                        ->mapWithKeys(fn (string $status) => [$status => Str::headline($status)])
+                        ->all()
+                )
+                ->default('available')
+                ->native(false),
 
             // Notes
             Textarea::make('notes'),

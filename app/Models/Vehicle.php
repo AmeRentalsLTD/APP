@@ -15,6 +15,7 @@ class Vehicle extends Model
         'available',
         'allocated',
         'maintenance',
+        'reserved',
         'offroad',
         'retired',
     ];
@@ -53,5 +54,15 @@ class Vehicle extends Model
     public function activeRental(): HasOne
     {
         return $this->hasOne(RentalAgreement::class)->where('status', 'active');
+    }
+
+    public function maintenanceRecords(): HasMany
+    {
+        return $this->hasMany(MaintenanceRecord::class);
+    }
+
+    public function financialTransactions(): HasMany
+    {
+        return $this->hasMany(FinancialTransaction::class);
     }
 }

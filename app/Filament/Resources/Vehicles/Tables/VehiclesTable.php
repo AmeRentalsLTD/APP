@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Vehicles\Tables;
 
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\EditAction;
+use App\Models\Vehicle;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class VehiclesTable
 {
@@ -34,6 +36,14 @@ class VehiclesTable
 
                 TextColumn::make('status')
                     ->badge()
+                    ->colors([
+                        'success' => 'available',
+                        'warning' => 'reserved',
+                        'info' => 'allocated',
+                        'danger' => 'maintenance',
+                        'gray' => 'offroad',
+                    ])
+                    ->formatStateUsing(fn (string $state) => Str::headline($state))
                     ->sortable()
                     ->toggleable(),
 
@@ -56,12 +66,11 @@ class VehiclesTable
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')
-                    ->options([
-                        'available'   => 'Available',
-                        'rented'      => 'Rented',
-                        'maintenance' => 'Maintenance',
-                        'reserved'    => 'Reserved',
-                    ])
+                    ->options(
+                        collect(Vehicle::STATUSES)
+                            ->mapWithKeys(fn (string $status) => [$status => Str::headline($status)])
+                            ->all()
+                    )
                     ->native(false),
             ])
             ->recordActions([
