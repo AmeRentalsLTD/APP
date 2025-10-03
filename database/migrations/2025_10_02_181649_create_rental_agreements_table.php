@@ -9,9 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-	public function up(): void
-	{
-		Schema::create('rental_agreements', function (Blueprint $table) {
+        public function up(): void
+        {
+                Schema::create('rental_agreements', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
 			$table->foreignId('customer_id')->constrained()->cascadeOnDelete();
@@ -39,11 +39,18 @@ return new class extends Migration
 
 			$table->timestamps();
 
-			// Un singur contract activ per vehicul
-			$table->unique(['vehicle_id','status'], 'vehicle_active_unique')
-				  ->where('status', 'active');
-		});
-	}
+                        // Un singur contract activ per vehicul
+                        if (Schema::getConnection()->getDriverName() === 'mysql') {
+                                $table->unsignedBigInteger('active_vehicle_id')
+                                      ->virtualAs("case when `status` = 'active' then `vehicle_id` else null end");
+
+                                $table->unique('active_vehicle_id', 'vehicle_active_unique');
+                        } else {
+                                $table->unique(['vehicle_id','status'], 'vehicle_active_unique')
+                                      ->where('status', 'active');
+                        }
+                });
+        }
 
     /**
      * Reverse the migrations.
