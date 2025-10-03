@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>VanGo Rentals</title>
+        <title>AME Rentals Ltd</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
@@ -291,100 +291,100 @@
     <body>
         <header>
             <nav>
-                <div class="brand">VanGo Rentals</div>
-                <a class="cta" href="tel:+40712345678">Rezervă acum</a>
+                <div class="brand">AME Rentals Ltd</div>
+                <a class="cta" href="tel:+447123456789">Book now</a>
             </nav>
             <div class="hero">
-                <h1>Experimentează libertatea drumurilor cu vanurile noastre premium</h1>
-                <p>Planifici un roadtrip cu familia, ai nevoie de transport pentru echipă sau cauți mobilitate pentru afacerea ta? VanGo Rentals îți oferă vanuri moderne, confortabile și complet echipate, gata de aventură.</p>
+                <h1>Experience the road with AME Rentals Ltd premium vans</h1>
+                <p>Planning a family road trip, moving your crew to an event, or need flexible mobility for business deliveries? AME Rentals Ltd keeps you moving with a modern fleet tailored to every journey.</p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary" href="#flota">Vezi flota noastră</a>
-                    <a class="btn btn-secondary" href="#contact">Solicită ofertă</a>
+                    <a class="btn btn-primary" href="#fleet">Explore our fleet</a>
+                    <a class="btn btn-secondary" href="#about">Discover our story</a>
                 </div>
             </div>
         </header>
 
         <main>
-            <section>
-                <h2>De ce VanGo?</h2>
+            <section id="about">
+                <h2>Why choose AME Rentals Ltd?</h2>
                 <div class="features">
                     <article class="feature-card">
-                        <h3>Flotă modernă</h3>
-                        <p>Vanuri noi, cu dotări de top: aer condiționat, multimedia, scaune confortabile și spațiu generos pentru bagaje.</p>
+                        <h3>Trusted UK operator</h3>
+                        <p>Founded in London in 2017, AME Rentals Ltd supports corporate partners and families alike with reliable, fully insured vehicles and professional service.</p>
                     </article>
                     <article class="feature-card">
-                        <h3>Flexibilitate totală</h3>
-                        <p>Închirieri pe termen scurt sau lung, preluare și predare rapidă, în funcție de planurile tale.</p>
+                        <h3>Flexible mobility</h3>
+                        <p>Short-term rentals, long-term agreements, and bespoke logistics packages ensure you only pay for the time and equipment you truly need.</p>
                     </article>
                     <article class="feature-card">
-                        <h3>Asistență 24/7</h3>
-                        <p>Echipa noastră este mereu disponibilă pentru suport tehnic, recomandări și personalizarea rezervărilor.</p>
+                        <h3>Dedicated assistance</h3>
+                        <p>Our multilingual support team is available 24/7 with route planning, roadside assistance, and safety briefings for every driver.</p>
                     </article>
                     <article class="feature-card">
-                        <h3>Tarife transparente</h3>
-                        <p>Fără costuri ascunse, doar oferte clare și competitive, adaptate bugetului tău.</p>
+                        <h3>Transparent pricing</h3>
+                        <p>No hidden fees—just clear, competitive rates with maintenance, insurance, and GPS tracking included as standard.</p>
                     </article>
                 </div>
             </section>
 
-            <section id="flota">
-                <h2>Flota noastră</h2>
+            <section id="fleet">
+                <h2>Our signature fleet</h2>
                 <div class="fleet">
                     <article class="van-card">
                         <img src="https://images.unsplash.com/photo-1525104698733-6f6c4d54936f?auto=format&fit=crop&w=900&q=80" alt="Van premium">
                         <div class="content">
                             <h3>Urban Explorer</h3>
-                            <p>Perfect pentru oraș și transferuri rapide. 7 locuri confortabile și spațiu pentru bagaje.</p>
-                            <span>De la 79€ / zi</span>
+                            <p>Compact nine-seater ideal for airport shuttles and inner-city deliveries with efficient fuel consumption.</p>
+                            <span>From £69 / day</span>
                         </div>
                     </article>
                     <article class="van-card">
                         <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Van pentru aventuri">
                         <div class="content">
                             <h3>Adventure XL</h3>
-                            <p>Van spațios pentru roadtrip-uri lungi. Include pachete pentru dormit, frigider și bicicletă.</p>
-                            <span>De la 99€ / zi</span>
+                            <p>Spacious tourer equipped with sleeping pods, portable fridge, and bike racks for week-long getaways.</p>
+                            <span>From £92 / day</span>
                         </div>
                     </article>
                     <article class="van-card">
                         <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=900&q=80" alt="Van business">
                         <div class="content">
                             <h3>Business Shuttle</h3>
-                            <p>Ideal pentru transferuri corporate și evenimente. Conectivitate Wi-Fi, scaune executive.</p>
-                            <span>De la 119€ / zi</span>
+                            <p>Premium Mercedes-Benz vans with Wi-Fi, conference seating, and chauffeur options for executive travel.</p>
+                            <span>From £115 / day</span>
                         </div>
                     </article>
                 </div>
             </section>
 
             <section>
-                <h2>Testimoniale</h2>
+                <h2>Client feedback</h2>
                 <div class="testimonials">
                     <article class="testimonial">
-                        <p>„VanGo ne-a oferit un van impecabil pentru turul nostru de familie prin Transilvania. Serviciu rapid și prietenos!”</p>
-                        <strong>Maria & Andrei</strong>
+                        <p>“AME Rentals Ltd kept our touring production on schedule across the UK. Immaculate vehicles and proactive communication.”</p>
+                        <strong>Sarah Mitchell, Tour Manager</strong>
                     </article>
                     <article class="testimonial">
-                        <p>„Ideal pentru evenimente corporate. Șoferul profesionist și dotările vanului au făcut diferența.”</p>
-                        <strong>Raluca, HR Manager</strong>
+                        <p>“Ideal partner for corporate events. Their chauffeur-driven Business Shuttle delivered a flawless VIP experience.”</p>
+                        <strong>James Turner, HR Director</strong>
                     </article>
                     <article class="testimonial">
-                        <p>„Am închiriat Adventure XL pentru o tură cu prietenii și a fost super! Recomand pentru roadtrip-uri lungi.”</p>
-                        <strong>Vlad, pasionat de călătorii</strong>
+                        <p>“We hired the Adventure XL for a Scottish Highlands adventure and loved every mile—well-equipped and ready for the wild.”</p>
+                        <strong>Emma Wilson, Travel Enthusiast</strong>
                     </article>
                 </div>
             </section>
 
             <section id="contact" class="cta-section">
-                <h2>Ești gata de drum?</h2>
-                <p>Sună-ne sau trimite-ne un mesaj cu planul tău, iar noi îți pregătim oferta perfectă în cel mult 30 de minute.</p>
-                <a class="btn btn-primary" href="tel:+40712345678">+40 712 345 678</a>
-                <a class="btn btn-secondary" href="mailto:contact@vango.ro">contact@vango.ro</a>
+                <h2>Ready to start your journey?</h2>
+                <p>Call or email our London operations team with your itinerary. We will prepare a tailored quote within 30 minutes, including delivery and collection options across the UK.</p>
+                <a class="btn btn-primary" href="tel:+447123456789">+44 7123 456 789</a>
+                <a class="btn btn-secondary" href="mailto:booking@amerentals.co.uk">booking@amerentals.co.uk</a>
             </section>
         </main>
 
         <footer>
-            &copy; {{ date('Y') }} VanGo Rentals · Toate drepturile rezervate · Politica de confidențialitate
+            &copy; {{ date('Y') }} AME Rentals Ltd · Registered in England & Wales · Company No. 10876543
         </footer>
     </body>
 </html>
