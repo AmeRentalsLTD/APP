@@ -58,6 +58,10 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole(UserRole::ADMIN);
+        // Permitem tuturor rolurilor definite să acceseze panoul până când
+        // există portaluri dedicate pentru clienți și șoferi. În acest fel
+        // evităm erorile 403 pentru conturile create înainte de introducerea
+        // rolurilor explicite.
+        return in_array($this->role, UserRole::cases(), true);
     }
 }
