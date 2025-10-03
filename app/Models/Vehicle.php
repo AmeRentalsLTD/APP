@@ -65,4 +65,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(FinancialTransaction::class);
     }
+
+    public function inspections(): HasMany
+    {
+        return $this->hasMany(VehicleInspection::class);
+    }
 }
