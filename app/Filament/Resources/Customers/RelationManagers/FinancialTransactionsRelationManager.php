@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Customers\RelationManagers;
 
 use App\Filament\Resources\FinancialTransactions\Schemas\FinancialTransactionForm;
 use App\Models\FinancialTransaction;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
@@ -20,10 +20,11 @@ class FinancialTransactionsRelationManager extends RelationManager
 
     protected static ?string $title = 'Financial history';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form->schema(
-            FinancialTransactionForm::getComponents(includeCustomerField: false)
+        return FinancialTransactionForm::configure(
+            $schema,
+            includeCustomerField: false
         );
     }
 

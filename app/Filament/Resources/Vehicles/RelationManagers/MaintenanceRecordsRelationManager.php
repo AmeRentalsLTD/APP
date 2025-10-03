@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Vehicles\RelationManagers;
 
 use App\Filament\Resources\MaintenanceRecords\Schemas\MaintenanceRecordForm;
 use App\Models\MaintenanceRecord;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
@@ -20,10 +20,11 @@ class MaintenanceRecordsRelationManager extends RelationManager
 
     protected static ?string $title = 'Maintenance history';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form->schema(
-            MaintenanceRecordForm::getComponents(includeVehicleField: false)
+        return MaintenanceRecordForm::configure(
+            $schema,
+            includeVehicleField: false
         );
     }
 
