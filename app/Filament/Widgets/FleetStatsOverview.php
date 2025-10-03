@@ -9,7 +9,7 @@ use App\Models\Vehicle;
 use Carbon\Carbon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\Number;
+use NumberFormatter;
 
 class FleetStatsOverview extends StatsOverviewWidget
 {
@@ -38,27 +38,45 @@ class FleetStatsOverview extends StatsOverviewWidget
         $netCashflow = $monthlyIncome - $monthlyExpenses;
 
         return [
-            Stat::make('Fleet vehicles', Number::format($totalVehicles))
-                ->description(Number::format($availableVehicles) . ' available')
+            Stat::make('Fleet vehicles', $this->formatNumber($totalVehicles))
+                ->description($this->formatNumber($availableVehicles) . ' available')
                 ->descriptionIcon('heroicon-m-truck')
                 ->color('primary'),
 
-            Stat::make('Active rentals', Number::format($activeAgreements))
+            Stat::make('Active rentals', $this->formatNumber($activeAgreements))
                 ->description($occupancy . '% fleet occupancy')
                 ->descriptionIcon('heroicon-m-chart-pie')
                 ->color($occupancy >= 80 ? 'success' : 'warning'),
 
-            Stat::make('Open maintenance', Number::format($maintenanceInProgress))
+            Stat::make('Open maintenance', $this->formatNumber($maintenanceInProgress))
                 ->description('Scheduled or in progress')
                 ->descriptionIcon('heroicon-m-wrench-screwdriver')
                 ->color($maintenanceInProgress === 0 ? 'success' : 'danger'),
 
-            Stat::make('Net cashflow (month)', Number::currency($netCashflow, 'GBP'))
+            Stat::make('Net cashflow (month)', $this->formatCurrency($netCashflow, 'GBP'))
                 ->description(
-                    'Income ' . Number::currency($monthlyIncome, 'GBP') . ' / Expenses ' . Number::currency($monthlyExpenses, 'GBP')
+                    'Income ' . $this->formatCurrency($monthlyIncome, 'GBP') . ' / Expenses ' . $this->formatCurrency($monthlyExpenses, 'GBP')
                 )
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color($netCashflow >= 0 ? 'success' : 'danger'),
         ];
+    }
+
+    private function formatNumber(int|float $value): string
+    {
+        return number_format($value);
+    }
+
+    private function formatCurrency(int|float $value, string $currency): string
+    {
+        $formatter = new NumberFormatter(app()->getLocale(), NumberFormatter::CURRENCY);
+
+        $formatted = $formatter->formatCurrency($value, $currency);
+
+        if ($formatted !== false) {
+            return $formatted;
+        }
+
+        return sprintf('%s %s', $currency, number_format($value, 2));
     }
 }
