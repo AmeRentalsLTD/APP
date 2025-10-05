@@ -20,6 +20,8 @@ class Vehicle extends Model
         'retired',
     ];
 
+    public const COMPLIANCE_ALERT_WINDOW_DAYS = 30;
+
     protected $fillable = [
         'registration',
         'make',
