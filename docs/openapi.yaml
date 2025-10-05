@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: AME Rentals API
+  version: 1.0.0
+servers:
+  - url: /api/v1
+paths:
+  /vehicles:
+    get:
+      summary: List vehicles
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleCreate'
+      responses:
+        '201':
+          description: Created
+  /customers:
+    get:
+      summary: List customers
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+      responses:
+        '201':
+          description: Created
+  /rental-agreements:
+    get:
+      summary: List rental agreements
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create rental agreement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RentalAgreementCreate'
+      responses:
+        '201':
+          description: Created
+components:
+  schemas:
+    VehicleCreate:
+      type: object
+      required: [registration, make, model, year]
+      properties:
+        registration: { type: string, example: "EU14YMF" }
+        make: { type: string, example: "Ford" }
+        model: { type: string, example: "Transit" }
+        year: { type: integer, example: 2019 }
+        status: { type: string, example: "available" }
+    CustomerCreate:
+      type: object
+      required: [name, email]
+      properties:
+        name: { type: string, example: "John Smith" }
+        email: { type: string, format: email, example: "john@example.com" }
+        organisation_type: { type: string, enum: [individual, company], example: "company" }
+    RentalAgreementCreate:
+      type: object
+      required: [vehicle_id, customer_id, start_date, billing_cycle]
+      properties:
+        vehicle_id: { type: integer, example: 1 }
+        customer_id: { type: integer, example: 42 }
+        start_date: { type: string, format: date }
+        end_date: { type: string, format: date, nullable: true }
+        deposit_amount: { type: number, format: float, example: 500 }
+        billing_cycle: { type: string, enum: [weekly, monthly], example: "weekly" }
+        mileage_policy: { type: string, enum: [unlimited, capped], example: "unlimited" }
