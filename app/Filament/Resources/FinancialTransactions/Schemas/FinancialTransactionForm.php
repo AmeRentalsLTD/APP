@@ -5,7 +5,7 @@ namespace App\Filament\Resources\FinancialTransactions\Schemas;
 use App\Models\Customer;
 use App\Models\FinancialTransaction;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Forms\Set;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
