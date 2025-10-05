@@ -18,7 +18,7 @@ class FinancialTransactionFactory extends Factory
 
         return [
             'type' => $type,
-            'category' => $this->faker->randomElement(FinancialTransaction::CATEGORIES),
+            'category' => $this->faker->randomElement(FinancialTransaction::categories($type)),
             'reference' => $this->faker->boolean(70) ? $this->faker->bothify('REF-####') : null,
             'amount' => $this->faker->randomFloat(2, 25, 2500),
             'transaction_date' => $this->faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d'),
@@ -32,6 +32,7 @@ class FinancialTransactionFactory extends Factory
     {
         return $this->state(fn () => [
             'type' => 'income',
+            'category' => fake()->randomElement(FinancialTransaction::categories('income')),
         ]);
     }
 
@@ -39,6 +40,7 @@ class FinancialTransactionFactory extends Factory
     {
         return $this->state(fn () => [
             'type' => 'expense',
+            'category' => fake()->randomElement(FinancialTransaction::categories('expense')),
         ]);
     }
 }

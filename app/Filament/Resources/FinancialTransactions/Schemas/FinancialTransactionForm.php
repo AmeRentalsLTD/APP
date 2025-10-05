@@ -5,6 +5,8 @@ namespace App\Filament\Resources\FinancialTransactions\Schemas;
 use App\Models\Customer;
 use App\Models\FinancialTransaction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -55,14 +57,21 @@ class FinancialTransactionForm
                 ->schema([
                     Select::make('type')
                         ->options(self::options(FinancialTransaction::TYPES))
-                        ->default('income')
+                        ->default(FinancialTransaction::TYPES[0])
                         ->required()
-                        ->native(false),
+                        ->native(false)
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, ?string $state): void {
+                            $set('category', FinancialTransaction::defaultCategory($state));
+                        }),
                     Select::make('category')
-                        ->options(self::options(FinancialTransaction::CATEGORIES))
-                        ->default('rental_income')
+                        ->options(fn (Get $get): array => self::options(
+                            FinancialTransaction::categories($get('type'))
+                        ))
+                        ->default(FinancialTransaction::defaultCategory())
                         ->required()
-                        ->native(false),
+                        ->native(false)
+                        ->searchable(),
                     DatePicker::make('transaction_date')
                         ->default(now())
                         ->required(),

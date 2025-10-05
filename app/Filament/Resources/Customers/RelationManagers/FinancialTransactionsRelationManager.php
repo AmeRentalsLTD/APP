@@ -63,8 +63,9 @@ class FinancialTransactionsRelationManager extends RelationManager
                     ->options(self::options(FinancialTransaction::TYPES))
                     ->native(false),
                 SelectFilter::make('category')
-                    ->options(self::options(FinancialTransaction::CATEGORIES))
-                    ->native(false),
+                    ->options(self::options(FinancialTransaction::categories()))
+                    ->native(false)
+                    ->searchable(),
             ])
             ->headerActions([
                 CreateAction::make(),
