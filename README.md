@@ -1,5 +1,9 @@
 # AME Rentals Platform
 
+[![CI](https://github.com/AmeRentalsLTD/APP/actions/workflows/ci.yml/badge.svg)](https://github.com/AmeRentalsLTD/APP/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/AmeRentalsLTD/APP/actions/workflows/codeql.yml/badge.svg)](https://github.com/AmeRentalsLTD/APP/actions/workflows/codeql.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Getting Started
 
 1. Install PHP dependencies:
@@ -34,6 +38,10 @@
    npm run build
    ```
 
+## API Docs
+
+Swagger UI is available at [`/api/docs`](http://localhost/api/docs), powered by [L5 Swagger](https://github.com/DarkaOnLine/L5-Swagger). The canonical OpenAPI definition lives at [`docs/openapi.yaml`](docs/openapi.yaml).
+
 ## API Overview
 
 The first iteration of the fleet rental platform exposes a versioned REST API located under `/api/v1`.
@@ -51,6 +59,14 @@ The first iteration of the fleet rental platform exposes a versioned REST API lo
 - Rental agreements enforce compatible options for billing cycles, mileage policies, and payment cadence.
 
 Each endpoint returns a JSON:API-like payload with the resource stored under the `data` key. Pagination metadata is included automatically when listing resources.
+
+## Development
+
+Common tooling commands:
+
+- `composer format`
+- `composer analyse`
+- `php artisan test --parallel`
 
 ## Testing
 
