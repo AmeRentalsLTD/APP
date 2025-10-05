@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Widgets\FleetStatsOverview;
 use App\Filament\Widgets\UpcomingMaintenance;
+use App\Filament\Widgets\VehicleCompliance;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -42,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FleetStatsOverview::class,
                 UpcomingMaintenance::class,
+                VehicleCompliance::class,
             ])
             ->middleware([
                 EncryptCookies::class,

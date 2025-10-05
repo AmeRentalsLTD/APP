@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\Vehicles\Tables;
 
 use App\Models\Vehicle;
+use App\Support\VehicleCompliance as VehicleComplianceSupport;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -48,10 +51,20 @@ class VehiclesTable
                     ->toggleable(),
 
                 TextColumn::make('mot_expiry')
-                    ->label('MOT Expiry')
-                    ->date()
+                    ->label('MOT')
+                    ->badge()
+                    ->color(fn ($state): string => VehicleComplianceSupport::color($state))
+                    ->formatStateUsing(fn ($state): string => VehicleComplianceSupport::label($state))
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
+
+                TextColumn::make('road_tax_due')
+                    ->label('Road tax')
+                    ->badge()
+                    ->color(fn ($state): string => VehicleComplianceSupport::color($state))
+                    ->formatStateUsing(fn ($state): string => VehicleComplianceSupport::label($state))
+                    ->sortable()
+                    ->toggleable(),
 
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -71,6 +84,37 @@ class VehiclesTable
                             ->mapWithKeys(fn (string $status) => [$status => Str::headline($status)])
                             ->all()
                     )
+                    ->native(false),
+                SelectFilter::make('compliance')
+                    ->label('Compliance')
+                    ->options([
+                        'expired' => 'Expired',
+                        'due_soon' => 'Due soon',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        $value = $data['value'] ?? null;
+
+                        if (! $value) {
+                            return $query;
+                        }
+
+                        $today = Carbon::today();
+                        $threshold = $today->copy()->addDays(Vehicle::COMPLIANCE_ALERT_WINDOW_DAYS);
+
+                        return $query->where(function (Builder $subQuery) use ($value, $today, $threshold): void {
+                            if ($value === 'expired') {
+                                $subQuery
+                                    ->whereDate('mot_expiry', '<', $today)
+                                    ->orWhereDate('road_tax_due', '<', $today);
+
+                                return;
+                            }
+
+                            $subQuery
+                                ->whereBetween('mot_expiry', [$today, $threshold])
+                                ->orWhereBetween('road_tax_due', [$today, $threshold]);
+                        });
+                    })
                     ->native(false),
             ])
             ->recordActions([
