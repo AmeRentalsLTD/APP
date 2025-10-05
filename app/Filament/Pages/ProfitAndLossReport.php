@@ -199,6 +199,47 @@ class ProfitAndLossReport extends Page
         return sprintf('Until %s', $end->format('j M Y'));
     }
 
+    public function categoryShare(array $category, float $total): float
+    {
+        $value = (float) ($category['total'] ?? 0.0);
+
+        if ($total <= 0.0) {
+            return 0.0;
+        }
+
+        $percentage = ($value / $total) * 100;
+
+        return round(min(max($percentage, 0.0), 100.0), 1);
+    }
+
+    public function netMargin(): ?float
+    {
+        $income = (float) ($this->summary['income'] ?? 0.0);
+
+        if ($income === 0.0) {
+            return null;
+        }
+
+        $net = (float) ($this->summary['net'] ?? 0.0);
+
+        return round(($net / $income) * 100, 1);
+    }
+
+    public function formatPercentage(?float $value): string
+    {
+        if ($value === null) {
+            return '—';
+        }
+
+        $formatted = rtrim(rtrim(number_format($value, 1, '.', ''), '0'), '.');
+
+        if ($formatted === '-0') {
+            $formatted = '0';
+        }
+
+        return $formatted.'%';
+    }
+
     public function periodOptions(): array
     {
         return [
