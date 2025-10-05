@@ -7,12 +7,18 @@ use App\Http\Requests\VehicleStoreRequest;
 use App\Http\Requests\VehicleUpdateRequest;
 use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
+use App\Support\VehicleComplianceSyncer;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class VehicleController extends Controller
 {
+    public function __construct(private readonly VehicleComplianceSyncer $complianceSyncer)
+    {
+    }
+
     public function index(): AnonymousResourceCollection
     {
         $vehicles = Vehicle::query()
@@ -25,6 +31,8 @@ class VehicleController extends Controller
     public function store(VehicleStoreRequest $request): JsonResponse
     {
         $vehicle = Vehicle::create($request->validated());
+
+        $this->refreshCompliance($vehicle, $request);
 
         return VehicleResource::make($vehicle)
             ->response()
@@ -41,6 +49,8 @@ class VehicleController extends Controller
         $vehicle->fill($request->validated());
         $vehicle->save();
 
+        $this->refreshCompliance($vehicle, $request);
+
         return VehicleResource::make($vehicle);
     }
 
@@ -49,5 +59,21 @@ class VehicleController extends Controller
         $vehicle->delete();
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    private function refreshCompliance(Vehicle $vehicle, FormRequest $request): void
+    {
+        if (! $this->shouldSyncCompliance($request)) {
+            return;
+        }
+
+        if ($this->complianceSyncer->sync($vehicle)) {
+            $vehicle->refresh();
+        }
+    }
+
+    private function shouldSyncCompliance(FormRequest $request): bool
+    {
+        return ! $request->filled('mot_expiry') && ! $request->filled('road_tax_due');
     }
 }

@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+    'gov_uk' => [
+        'dvla' => [
+            'api_key' => env('GOV_UK_DVLA_API_KEY'),
+            'base_url' => env('GOV_UK_DVLA_BASE_URL', 'https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1'),
+        ],
+        'dvsa' => [
+            'api_key' => env('GOV_UK_DVSA_API_KEY'),
+            'base_url' => env('GOV_UK_DVSA_BASE_URL', 'https://beta.check-mot.service.gov.uk/trade/vehicles'),
+        ],
+    ],
+
 ];
