@@ -58,8 +58,9 @@ class FinancialTransactionsTable
                     ->options(self::options(FinancialTransaction::TYPES))
                     ->native(false),
                 SelectFilter::make('category')
-                    ->options(self::options(FinancialTransaction::CATEGORIES))
-                    ->native(false),
+                    ->options(self::options(FinancialTransaction::categories()))
+                    ->native(false)
+                    ->searchable(),
                 Filter::make('transaction_date')
                     ->form([
                         DatePicker::make('from'),
