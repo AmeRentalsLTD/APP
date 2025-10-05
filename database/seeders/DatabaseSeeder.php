@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
             'role' => UserRole::CLIENT,
             'password' => 'password',
         ]);
+
+        $this->call(FinancialTransactionSeeder::class);
     }
 }

@@ -66,6 +66,43 @@
                 flex-wrap: wrap;
             }
 
+            .nav {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+                font-weight: 500;
+                font-size: 0.95rem;
+            }
+
+            .nav a {
+                color: rgba(255, 255, 255, 0.85);
+                text-decoration: none;
+                padding: 0.35rem 0;
+                position: relative;
+            }
+
+            .nav a::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -0.45rem;
+                height: 2px;
+                background: rgba(255, 255, 255, 0.65);
+                border-radius: 999px;
+                transform: scaleX(0);
+                transition: transform 0.2s ease;
+            }
+
+            .nav a:hover::after,
+            .nav a.active::after {
+                transform: scaleX(1);
+            }
+
+            .nav a.active {
+                color: #ffffff;
+            }
+
             .brand {
                 display: flex;
                 align-items: center;
@@ -276,6 +313,12 @@
 
                 .topbar {
                     justify-content: center;
+                    gap: 1rem;
+                }
+
+                .nav {
+                    width: 100%;
+                    justify-content: center;
                 }
 
                 section {
@@ -302,13 +345,17 @@
                         <span>Operations Portal</span>
                     </div>
                 </div>
+                <nav class="nav">
+                    <a href="/" class="active">Acasă</a>
+                    <a href="{{ route('reports.profit-and-loss') }}">Profit &amp; Loss</a>
+                </nav>
                 <a class="btn btn-outline" href="mailto:support@amerentals.co.uk">support@amerentals.co.uk</a>
             </div>
             <div class="hero">
                 <h1>Welcome to the AME Rentals operations portal</h1>
                 <p>Centralise fleet management, track bookings and support every journey from the dedicated AME Rentals platform. Log in for the latest tools crafted for our teams and trusted partners.</p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary" href="/admin">Launch portal</a>
+                    <a class="btn btn-primary" href="{{ route('reports.profit-and-loss') }}">Profit &amp; Loss dashboard</a>
                     <a class="btn btn-outline" href="#support">Contact support</a>
                 </div>
             </div>
