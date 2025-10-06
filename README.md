@@ -38,6 +38,24 @@
    npm run build
    ```
 
+### Finance module quickstart
+
+Seed the finance demo data and useful shortcuts:
+
+```bash
+php artisan finance:demo
+```
+
+This command will populate sample customers, vehicles, rentals, invoices, deposits, payments, and expenses for AME Rentals Ltd. It will also remind you that the Filament admin panel lives under `/admin` and that the new finance reports are grouped within the **Finance reports** navigation section.
+
+To keep recurring invoices, overdue statuses, and deposit releases up to date, schedule the following cron entry on your host (this triggers Laravel's scheduler every minute):
+
+```
+* * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+```
+
+The scheduler will cascade into three queued jobs: `GenerateRecurringInvoicesJob`, `MarkOverdueInvoicesJob`, and `DepositReleaseEligibilityJob`.
+
 ## API Docs
 
 Swagger UI is available at [`/api/docs`](http://localhost/api/docs), powered by [L5 Swagger](https://github.com/DarkaOnLine/L5-Swagger). The canonical OpenAPI definition lives at [`docs/openapi.yaml`](docs/openapi.yaml).

@@ -48,14 +48,19 @@ class Vehicle extends Model
         'has_vat' => 'boolean',
     ];
 
-    public function rentalAgreements(): HasMany
+    public function rentals(): HasMany
     {
-        return $this->hasMany(RentalAgreement::class);
+        return $this->hasMany(Rental::class);
     }
 
     public function activeRental(): HasOne
     {
-        return $this->hasOne(RentalAgreement::class)->where('status', 'active');
+        return $this->hasOne(Rental::class)->where('status', 'active');
+    }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class);
     }
 
     public function maintenanceRecords(): HasMany
