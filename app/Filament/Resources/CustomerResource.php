@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Customer;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -17,7 +18,7 @@ class CustomerResource extends Resource
 
     protected static UnitEnum|string|null $navigationGroup = 'Finance';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {

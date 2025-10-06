@@ -6,6 +6,7 @@ use App\Filament\Resources\DepositResource\Pages;
 use App\Models\Deposit;
 use App\Services\InvoiceNumberGenerator;
 use App\Services\VatCalculator;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -19,7 +20,7 @@ class DepositResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-banknotes';
 
     public static function form(Form $form): Form
     {

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\InvoiceResource\Pages;
 use App\Mail\SendInvoiceEmail;
 use App\Models\Invoice;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -19,7 +20,7 @@ class InvoiceResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 
     public static function form(Form $form): Form
     {
