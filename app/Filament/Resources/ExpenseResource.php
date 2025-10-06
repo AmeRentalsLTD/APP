@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ExpenseResource\Pages;
 use App\Models\Expense;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -17,7 +18,7 @@ class ExpenseResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
-    protected static ?string $navigationIcon = 'heroicon-o-receipt-refund';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-receipt-refund';
 
     public static function form(Form $form): Form
     {
