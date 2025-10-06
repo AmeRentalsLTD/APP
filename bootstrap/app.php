@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\SyncVehicleCompliance;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
             require base_path('routes/docs.php');
         },
     )
+    ->withCommands([
+        SyncVehicleCompliance::class,
+    ])
     ->withMiddleware(function (Middleware $middleware): void {
         //
     })
