@@ -8,7 +8,7 @@ use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
 use UnitEnum;
@@ -37,9 +37,9 @@ class VatSummary extends Page implements HasForms
         $this->runReport();
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\DatePicker::make('from')->label('From'),
                 Forms\Components\DatePicker::make('until')->label('Until'),
