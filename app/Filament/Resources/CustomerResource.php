@@ -6,7 +6,7 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Customer;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,10 +20,10 @@ class CustomerResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-user-group';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->label('Name')

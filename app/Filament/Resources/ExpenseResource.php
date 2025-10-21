@@ -6,7 +6,7 @@ use App\Filament\Resources\ExpenseResource\Pages;
 use App\Models\Expense;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,10 +20,10 @@ class ExpenseResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-receipt-refund';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Forms\Components\Select::make('vehicle_id')
                     ->relationship('vehicle', 'registration')
                     ->searchable()
