@@ -5,12 +5,13 @@ namespace App\Filament\Pages;
 use App\Models\Invoice;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
+use UnitEnum;
 
 class AgingReport extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-clock';
 
-    protected static ?string $navigationGroup = 'Finance reports';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
     protected static string $view = 'filament.pages.aging-report';
 
