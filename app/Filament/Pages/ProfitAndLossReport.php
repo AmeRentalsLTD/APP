@@ -12,15 +12,15 @@ use UnitEnum;
 
 class ProfitAndLossReport extends Page
 {
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-presentation-chart-line';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-presentation-chart-line';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Finance';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance';
 
     protected static ?int $navigationSort = 2;
 
     protected static ?string $title = 'Profit & Loss';
 
-    protected static string $view = 'filament.pages.profit-and-loss-report';
+    protected string $view = 'filament.pages.profit-and-loss-report';
 
     public string $period = 'this_month';
 

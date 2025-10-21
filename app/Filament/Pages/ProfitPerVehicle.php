@@ -3,21 +3,23 @@
 namespace App\Filament\Pages;
 
 use App\Models\Vehicle;
+use BackedEnum;
 use Filament\Forms;
-use Filament\Pages\Page;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
+use UnitEnum;
 
 class ProfitPerVehicle extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-chart-bar';
 
-    protected static ?string $navigationGroup = 'Finance reports';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
-    protected static string $view = 'filament.pages.profit-per-vehicle';
+    protected string $view = 'filament.pages.profit-per-vehicle';
 
     public ?array $data = [];
 
