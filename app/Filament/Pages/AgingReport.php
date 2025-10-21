@@ -14,7 +14,7 @@ class AgingReport extends Page
 
     protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
-    protected static string $view = 'filament.pages.aging-report';
+    protected ?string $view = 'filament.pages.aging-report';
 
     public array $buckets = [];
 
