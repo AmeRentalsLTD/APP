@@ -7,9 +7,10 @@ use App\Mail\SendInvoiceEmail;
 use App\Models\Invoice;
 use BackedEnum;
 use UnitEnum;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
@@ -71,13 +72,13 @@ class InvoiceResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\Action::make('sendPdf')
+                Actions\Action::make('sendPdf')
                     ->label('Send PDF')
                     ->requiresConfirmation()
                     ->action(function (Invoice $record) {
                         Mail::to($record->customer->email)->queue(new SendInvoiceEmail($record));
                     }),
-                Tables\Actions\Action::make('addPayment')
+                Actions\Action::make('addPayment')
                     ->label('Add payment')
                     ->form([
                         Forms\Components\Select::make('method')->options([
@@ -108,7 +109,7 @@ class InvoiceResource extends Resource
 
                         $record->refresh();
                     }),
-                Tables\Actions\Action::make('markPaid')
+                Actions\Action::make('markPaid')
                     ->label('Mark as paid')
                     ->requiresConfirmation()
                     ->visible(fn (Invoice $record) => $record->status !== 'paid')
@@ -116,15 +117,15 @@ class InvoiceResource extends Resource
                         $record->status = 'paid';
                         $record->save();
                     }),
-                Tables\Actions\Action::make('downloadPdf')
+                Actions\Action::make('downloadPdf')
                     ->label('Download PDF')
                     ->url(fn (Invoice $record) => route('invoices.pdf', $record))
                     ->openUrlInNewTab(),
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Actions\ViewAction::make(),
+                Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Actions\DeleteBulkAction::make(),
             ]);
     }
 

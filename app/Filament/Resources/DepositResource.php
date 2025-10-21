@@ -8,9 +8,10 @@ use App\Services\InvoiceNumberGenerator;
 use App\Services\VatCalculator;
 use BackedEnum;
 use UnitEnum;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
@@ -60,7 +61,7 @@ class DepositResource extends Resource
                 Tables\Columns\TextColumn::make('released_at')->date(),
             ])
             ->actions([
-                Tables\Actions\Action::make('release')
+                Actions\Action::make('release')
                     ->label('Release')
                     ->visible(fn (Deposit $record) => $record->status !== 'released')
                     ->requiresConfirmation()
@@ -70,7 +71,7 @@ class DepositResource extends Resource
                             'released_at' => Carbon::today(),
                         ]);
                     }),
-                Tables\Actions\Action::make('withhold')
+                Actions\Action::make('withhold')
                     ->label('Withhold')
                     ->form([
                         Forms\Components\TextInput::make('amount')
@@ -111,10 +112,10 @@ class DepositResource extends Resource
                             'note' => trim(($record->note ? $record->note . PHP_EOL : '') . 'Withheld: ' . $data['reason']),
                         ]);
                     }),
-                Tables\Actions\EditAction::make(),
+                Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Actions\DeleteBulkAction::make(),
             ]);
     }
 
