@@ -7,7 +7,7 @@ use App\Mail\SendInvoiceEmail;
 use App\Models\Invoice;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,10 +22,10 @@ class InvoiceResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Forms\Components\Select::make('customer_id')
                     ->relationship('customer', 'name')
                     ->required(),

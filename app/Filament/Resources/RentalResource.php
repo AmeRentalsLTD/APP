@@ -8,7 +8,7 @@ use App\Services\InvoiceNumberGenerator;
 use App\Services\VatCalculator;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,10 +22,10 @@ class RentalResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Forms\Components\Select::make('customer_id')
                     ->relationship('customer', 'name')
                     ->searchable()
