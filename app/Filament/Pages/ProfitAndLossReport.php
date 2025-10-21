@@ -20,7 +20,7 @@ class ProfitAndLossReport extends Page
 
     protected static ?string $title = 'Profit & Loss';
 
-    protected string $view = 'filament.pages.profit-and-loss-report';
+    protected static string $view = 'filament.pages.profit-and-loss-report';
 
     public string $period = 'this_month';
 
