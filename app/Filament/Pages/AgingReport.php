@@ -10,9 +10,9 @@ use UnitEnum;
 
 class AgingReport extends Page
 {
-    protected BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
 
-    protected UnitEnum|string|null $navigationGroup = 'Finance reports';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
     protected string $view = 'filament.pages.aging-report';
 
