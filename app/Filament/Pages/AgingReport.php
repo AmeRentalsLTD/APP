@@ -10,11 +10,11 @@ use UnitEnum;
 
 class AgingReport extends Page
 {
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
+    protected BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
+    protected UnitEnum|string|null $navigationGroup = 'Finance reports';
 
-    protected ?string $view = 'filament.pages.aging-report';
+    protected string $view = 'filament.pages.aging-report';
 
     public array $buckets = [];
 
