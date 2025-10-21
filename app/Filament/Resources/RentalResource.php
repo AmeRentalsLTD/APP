@@ -8,9 +8,10 @@ use App\Services\InvoiceNumberGenerator;
 use App\Services\VatCalculator;
 use BackedEnum;
 use UnitEnum;
+use Filament\Actions;
 use Filament\Forms;
-use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
@@ -88,15 +89,15 @@ class RentalResource extends Resource
                 Tables\Columns\TextColumn::make('start_date')->date(),
             ])
             ->actions([
-                Tables\Actions\Action::make('pause')
+                Actions\Action::make('pause')
                     ->label('Pause')
                     ->visible(fn (Rental $record) => $record->status === 'active')
                     ->action(fn (Rental $record) => $record->update(['status' => 'paused'])),
-                Tables\Actions\Action::make('resume')
+                Actions\Action::make('resume')
                     ->label('Resume')
                     ->visible(fn (Rental $record) => $record->status === 'paused')
                     ->action(fn (Rental $record) => $record->update(['status' => 'active'])),
-                Tables\Actions\Action::make('end')
+                Actions\Action::make('end')
                     ->label('End rental')
                     ->requiresConfirmation()
                     ->action(function (Rental $record) {
@@ -105,7 +106,7 @@ class RentalResource extends Resource
                             'end_date' => $record->end_date ?? Carbon::today(),
                         ]);
                     }),
-                Tables\Actions\Action::make('addCharge')
+                Actions\Action::make('addCharge')
                     ->label('Add charge')
                     ->form([
                         Forms\Components\Select::make('type')
@@ -167,10 +168,10 @@ class RentalResource extends Resource
                         $invoice->refresh();
                     })
                     ->modalHeading('Add manual charge'),
-                Tables\Actions\EditAction::make(),
+                Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Actions\DeleteBulkAction::make(),
             ]);
     }
 
