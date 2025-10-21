@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ExpenseResource\Pages;
 use App\Models\Expense;
 use BackedEnum;
-use UnitEnum;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -89,7 +88,7 @@ class ExpenseResource extends Resource
                     }),
             ])
             ->actions([
-                Actions\EditAction::make(),
+              EditAction::make(),
             ])
             ->bulkActions([
                 Actions\DeleteBulkAction::make(),
