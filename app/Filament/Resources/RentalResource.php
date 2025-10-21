@@ -7,6 +7,7 @@ use App\Models\Rental;
 use App\Services\InvoiceNumberGenerator;
 use App\Services\VatCalculator;
 use BackedEnum;
+use UnitEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class RentalResource extends Resource
 {
     protected static ?string $model = Rental::class;
 
-    protected static ?string $navigationGroup = 'Finance';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar';
 
