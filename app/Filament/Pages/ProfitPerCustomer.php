@@ -3,21 +3,23 @@
 namespace App\Filament\Pages;
 
 use App\Models\Customer;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
+use UnitEnum;
 
 class ProfitPerCustomer extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Finance reports';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
-    protected static string $view = 'filament.pages.profit-per-customer';
+    protected string $view = 'filament.pages.profit-per-customer';
 
     public array $results = [];
 

@@ -4,21 +4,23 @@ namespace App\Filament\Pages;
 
 use App\Models\Expense;
 use App\Models\Invoice;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
+use UnitEnum;
 
 class VatSummary extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-scale';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-scale';
 
-    protected static ?string $navigationGroup = 'Finance reports';
+    protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
-    protected static string $view = 'filament.pages.vat-summary';
+    protected string $view = 'filament.pages.vat-summary';
 
     public array $figures = [];
 
