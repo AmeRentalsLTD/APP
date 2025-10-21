@@ -124,4 +124,33 @@ class ProfitAndLossReportServiceTest extends TestCase
             ],
         ], $trend);
     }
+
+    public function test_generate_normalises_carbon_boundaries_to_whole_days(): void
+    {
+        FinancialTransaction::factory()->income()->create([
+            'amount' => 500,
+            'transaction_date' => '2024-05-01',
+        ]);
+
+        FinancialTransaction::factory()->expense()->create([
+            'amount' => 200,
+            'transaction_date' => '2024-05-31',
+        ]);
+
+        $service = new ProfitAndLossReportService();
+
+        $report = $service->generate(
+            Carbon::parse('2024-05-01 15:45:00'),
+            Carbon::parse('2024-05-31 02:15:00'),
+        );
+
+        $this->assertSame([
+            'start_date' => '2024-05-01',
+            'end_date' => '2024-05-31',
+        ], $report['period']);
+
+        $this->assertSame(500.0, $report['totals']['income']);
+        $this->assertSame(200.0, $report['totals']['expenses']);
+        $this->assertSame(300.0, $report['totals']['net']);
+    }
 }

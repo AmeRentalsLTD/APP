@@ -22,8 +22,8 @@ class ProfitAndLossReportService
      */
     public function generate(CarbonInterface|string $startDate, CarbonInterface|string $endDate): array
     {
-        $start = $this->parseDate($startDate);
-        $end = $this->parseDate($endDate);
+        $start = $this->parseBoundaryDate($startDate, false);
+        $end = $this->parseBoundaryDate($endDate, true);
 
         $query = FinancialTransaction::query()
             ->whereBetween('transaction_date', [$start, $end]);
@@ -100,10 +100,14 @@ class ProfitAndLossReportService
             ->all();
     }
 
-    private function parseDate(CarbonInterface|string $date): CarbonInterface
+    private function parseBoundaryDate(CarbonInterface|string $date, bool $isEnd): CarbonInterface
     {
-        return $date instanceof CarbonInterface
-            ? $date
-            : Carbon::parse($date)->startOfDay();
+        $carbon = $date instanceof CarbonInterface
+            ? $date->copy()
+            : Carbon::parse($date);
+
+        return $isEnd
+            ? $carbon->endOfDay()
+            : $carbon->startOfDay();
     }
 }
