@@ -3,13 +3,14 @@
 namespace App\Filament\Pages;
 
 use App\Models\Invoice;
+use BackedEnum;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
 use UnitEnum;
 
 class AgingReport extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
 
     protected static UnitEnum|string|null $navigationGroup = 'Finance reports';
 
