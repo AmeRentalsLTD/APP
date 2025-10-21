@@ -7,6 +7,7 @@ use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
 use UnitEnum;
@@ -35,21 +36,14 @@ class ProfitPerVehicle extends Page implements HasForms
         $this->runReport();
     }
 
-    protected function getFormSchema(): array
+    public function form(Form $form): Form
     {
-        return [
-            Forms\Components\DatePicker::make('from')->label('From'),
-            Forms\Components\DatePicker::make('until')->label('Until'),
-        ];
-    }
-
-    protected function getForms(): array
-    {
-        return [
-            'form' => $this->form(
-                schema: $this->getFormSchema(),
-            ),
-        ];
+        return $form
+            ->schema([
+                Forms\Components\DatePicker::make('from')->label('From'),
+                Forms\Components\DatePicker::make('until')->label('Until'),
+            ])
+            ->statePath('data');
     }
 
     public function runReport(): void
