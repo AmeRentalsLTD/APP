@@ -78,6 +78,19 @@ The first iteration of the fleet rental platform exposes a versioned REST API lo
 
 Each endpoint returns a JSON:API-like payload with the resource stored under the `data` key. Pagination metadata is included automatically when listing resources.
 
+## Vehicle compliance data
+
+When GOV.UK credentials are supplied the application can automatically hydrate a vehicle's MOT expiry and road tax due dates by querying the DVSA and DVLA trade APIs. Configure the following environment variables (also documented in `.env.example`):
+
+- `GOV_UK_DVLA_API_KEY` (and optional `GOV_UK_DVLA_BASE_URL`)
+- `GOV_UK_DVSA_API_KEY` (and optional `GOV_UK_DVSA_BASE_URL`)
+
+Newly created vehicles – or existing records updated without explicitly providing compliance dates – will be refreshed automatically. You can also run the scheduled-friendly artisan command to backfill the entire fleet:
+
+```bash
+php artisan vehicles:sync-compliance
+```
+
 ## Development
 
 Common tooling commands:
